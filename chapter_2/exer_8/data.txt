@@ -1,0 +1,9 @@
+     3 00000000 5F05                   a dw 1375
+     4 00000002 0000283D               b dd 0.041015625
+     5 00000006 00D40EC4               c dd -571.3125
+     6 0000000A 00B27F45               d dd 4091.125
+
+a: Occupes 2 bytes: 0 to 1
+b: Occupes 4 bytes: 2 to 5
+c: Occupes 4 bytes: 6 to 9
+d: Occupes 4 bytes: A to D
