@@ -1,0 +1,3 @@
+(gdb) info r rsp
+rsp            0x7fffffffe210	0x7fffffffe210
+(gdb)

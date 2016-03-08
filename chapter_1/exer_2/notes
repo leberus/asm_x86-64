@@ -1,0 +1,2 @@
+- Program with main entry point linked with gcc -> 7.0 KB
+- Program with _start entry point linked with ld -> 1.4 KB

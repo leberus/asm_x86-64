@@ -1,0 +1,27 @@
+==  Memory mapping ==
+
+- logical address = 0x4000002220  (	4096 = 2^12 , so offset within the page is 0x220, page number is the rest of the bytes 0x4000002.
+					Then the page number is translated to a X (physic addr), and is combined with the offset X + 0x220 )
+
+- In Linux, memorz for a process is divided into 4 logical regions:
+
+	. text  ( starts at 0 )
+	. data  ( is placed next to text section )
+	. stack ( is placed at highest memory address, restricted tipically to 16 MB. Placed at 0x7fffffffffff )
+	. heap  ( is placed next to data section )
+
+	. Layout:
+
+		__________
+	       |  stack   |
+	       ____________
+               |  heap    |
+	       ____________
+               |  data    |
+               ____________
+               |   text   |
+               ____________
+
+
+	. Given the high address where stack is placed, and the stack size limited to 16 MB, we can say that the lowest valid stack address is 0x7fffff000000.
+		The stack grows every time occurs a page fault, so when this happens, the operating system checks if this page fault ocurred within the stack valid range, and if that is the case, 			 the operating system allocates another page for the process.
