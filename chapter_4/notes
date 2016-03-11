@@ -1,0 +1,108 @@
+== Memory Mapping ==
+
+- CR3 register: Is the memory mapping register. Pointer to a top level of a hierarchical collection of tables in memory which define the translation from v.address to p.address.
+- Top level table: Page Map Level 4 (PML4)
+
+- Virtual Address layout:
+
+	 63-48	      47-39	    38-30      29-21	 20-12	      11-0
+	--------    ------------    ------     -----     -----    -------------
+        |unused|    |PML4 index|    |PDPI|     |PDI|	 |PTI|    |page offset|
+       
+
+PML4: Page Map Level 4 ( Array of 512 pointers. These pointers point to pages of memory )
+PDPI: Page Directory Pointer Index ( Array of 512 pointers )
+PDI:  Page Directory Index         ( Array of 512 pointers )
+PTI:  Page Table Index             ( Array of 512 pointers )
+Page Offset: Offset within the page
+top most 16 bits: IGNORED
+
+- Translation example:
+
+Given this p.address in CR3: 0x4ffff000
+
+
+= PLM4 =
+
+Bits:		47-39
+		-------
+		 0x001
+
+We access the second entry (0x001), so index1.
+
+		| PML4 at @ 0x4ffff000 |       Every index is at 4096 bytes from the other (0x1000)
+     Index.0     0x3466000
+     Index.1     0x3467000 	[X]
+     Index.2     0x3468000
+     Index.3     .....
+     ......
+     Index.511     unused
+
+
+
+= Page Directory Pointer Index =
+
+Bits:		38-30
+		------
+		0x002
+
+We access the third entry (0x002), so index.2
+
+		| Page Directory Pointer Table at @ 0x3467000 |
+     Index.0     0x3587000
+     Index.1	 unused
+     Index.2     0x3588000	[X]
+     Index.3    unused
+     .....
+     Index.511   unused
+
+
+
+
+= Page Directory Table =
+
+Bits:		29-21
+		-----
+		0x000
+
+We access the first entry (0x000), so index.0
+
+		| Page Directory Table at @ 0x3588000 |
+     Index.0	  0x3678000	[X]
+     Index.1	  0x3679000
+     Index.2	  unused
+     ....
+     Index.511    unused
+
+
+
+= Page Table =
+
+Bits:		20-12
+		-----
+		0x1ff
+
+We access the last entry (0x1ff),so index.511
+
+		| Page Table at @ 0x3678000 |
+     Index.0	  0x5788000
+     Index.1	  0x5789000
+     Index.2      0x578a000
+      .....
+     Index.511    0x5799000	[X]
+
+
+
+After using 4 tables we reach the address of the page of memory which was originally referenced. Then we can or the offset ( adddr | offset )
+
+
+                                       -------------
+0x5799000 | 0xfa8 : physical address:  | 0x5799fa8 |       virtual address:
+                                       _____________
+
+
+TLB: Hash table ( Presented with a virtual page address which generates physical page address within roughly 1/2 clock cycle
+	In case of failure, the memory search takes from 10-100 clock cycles. Miss rates are from 0.01% to 1%
+
+Linux uses the support of 2MB pages. (HUGETLB and SHM_HUGETLB)
+

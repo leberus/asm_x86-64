@@ -1,0 +1,3 @@
+OF- Flag is set if the operation overflows
+SF- Flag is set to the sing bit of the result
+ZF- Flag is set if the result is 0

@@ -1,0 +1,7 @@
+cmovz:  move if zero flag set
+cmovnz: move if zero flag not set
+cmovl:  move if result was negative
+cmovle: move if result was negative or zero
+cmovg:  move if result was positive
+cmovge: move if result was positive or zero
+
