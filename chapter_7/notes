@@ -1,0 +1,25 @@
+- Ex1: Write and assembly program to count all the 1 nts in a byte storned in memory. Use repeated code rather than a loop
+- Ex2: Write an assemblz program to swap 2 quad-words in memory using xor. Use the following algorithm:
+
+	a = a ^ b
+	b = a ^ b
+	a = a ^ b
+
+- Ex3: Write an assemblz program to use 3 quad-words in memory to represent 3 sets. A, B and C. Each set will allow storing set values 0-63 in the corresponding bits of the quard-word. Perform these steps:
+	insert 0 into A
+	insert 1 into A
+	insert 7 into A
+	insert 13 into A
+	insert 1 into B
+	insert 3 into B
+	insert 12 into B
+	store A union B into C
+	store A intersect B into C
+	store A - B into C
+	remove 7 from C
+
+- Ex4: Write an assemblz program to move a quad-word stored in memory int a register and then compute the exclusive-or of the 8 bytes of the word. Use either ror or rol to manipulate the bits of the register so that the original is retained.
+
+- Ex5: Write an assembly program to dissect a double stored in memory. This is 64 bit floating point value. Store the sign bit in one memory location. Store the exponent after substracting the bias value into a second memory location. Store the fraction field with the implicit 1 bit at the front of the bit string into a third memory location.
+
+- Ex6: Write an assembly program to perform a product of 2 float values using integer arithmetic and bit operations. Start with 2 float values in memory and store the product in memory.

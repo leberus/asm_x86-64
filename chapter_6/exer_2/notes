@@ -1,1 +1,4 @@
 - See: http://www.mathopenref.com/coordslope.html https://es.wikipedia.org/wiki/Pendiente_%28matem%C3%A1ticas%29
+
+
+- If we could do floating point division, this exercise would have you compute the slope of the line segment connection 2 points. Instead zou are to store the difference in x coordinates in 1 memory location and the difference in y coordinates in another. The input points are integers stored in memory. Leave register rax with the value 1 if the line segment is vertical (infinite or undefined slope) and 0 if it s not. You should use a conditional move to set the values of rax.

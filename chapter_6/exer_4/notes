@@ -1,2 +1,9 @@
 - KW/h: integer number of pennies stored in memory
 - Kilowatt hours used is also an integer stored in memory
+
+
+- The bill amount will be $5 plus the cost per kilowatt hour times the number of kilowatt hours over 1000. You can use a conditional move to set the number of hours over 1000 to 0 if the numbers of hours over 1000 is negative. Move the number of dollars into one memory location, and the number of pennies into another.
+
+
+- Cost KW/h: 30 pennies
+- Kilowatt hours used: 150
